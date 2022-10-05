@@ -1,0 +1,13 @@
+To-Do
+--Create mechanism for running at 60 fps
+--Make a file to read where it gets all the frames
+--Get all the frames from a link and then save them one at a time to a file
+
+
+Main
+--Runs the animation loop from the Animation class
+
+Animation (framerate, file)
+--Draw the frame instantly
+--Clear it
+--Draw the next one and do it 60 times per second
