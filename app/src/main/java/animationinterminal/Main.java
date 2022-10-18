@@ -1,6 +1,7 @@
+package animationinterminal;
 public class Main{
     public static void main(String args[]){
-        Animation animate = new Animation(60, "animation.txt");
-        Animation.animate();
+        Animation animation = new Animation(60, "animation.txt");
+        animation.animate();
     }
 }

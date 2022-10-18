@@ -1,9 +1,10 @@
+package animationinterminal;
 import java.io.File;
 import java.util.Scanner;
 public class Animation{
-    private File animation = new File(txt);
     private int frames;
     private String txt;
+    private File animation = new File(txt);
     public Animation(int frame, String text){
         frame = frames;
         text = txt;
