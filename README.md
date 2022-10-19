@@ -1,3 +1,5 @@
 # AnimationInTerminal
 
-Run using ./gradlew run
+Run using:
+gradle wrapper
+./gradlew run

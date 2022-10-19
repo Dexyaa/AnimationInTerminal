@@ -1,7 +1,7 @@
 package animationinterminal;
-public class Main{
+public class App{
     public static void main(String args[]){
-        Animation animation = new Animation(60, "animation.txt");
+        Animation animation = new Animation(2);
         animation.animate();
     }
 }
