@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Scanner;
 public class Animation{
     private int frames;
-    private File animation = new File("resources/animation.txt");
+    private File animation = new File("test/resources/animation.txt");
     public Animation(int frame){
         frames = frame;
         System.out.println(animation.getPath());

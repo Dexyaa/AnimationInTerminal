@@ -11,6 +11,10 @@ plugins {
     id 'application'
 }
 
+properties {
+    
+}
+
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -26,7 +30,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'animationinterminal.App'
+    mainClass = 'animationinterminal.Main'
 }
 
 tasks.named('test') {
