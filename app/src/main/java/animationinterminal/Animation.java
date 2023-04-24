@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.OutputStreamWriter;
+import java.util.Date;
 import java.util.Scanner;
 public class Animation{
     private int frames;
@@ -19,15 +20,21 @@ public class Animation{
         try{
             if(animation.canRead()){
                 try (BufferedReader reader = new BufferedReader(new FileReader(animation))) {
-                    BufferedWriter log = new BufferedWriter(new OutputStreamWriter(System.out));
-                    while(!reader.readLine().equals(separator) || reader.readLine() != null){
-                        String data = reader.readLine();
-                        log.write(data);
-                        Thread.sleep(1000/frames);
-                        if(!reader.readLine().equals(separator)){
-                            System.out.println("\033[H\033[2J");
-                            System.out.flush();
+                    while(reader.readLine() != null){
+                        BufferedWriter log = new BufferedWriter(new OutputStreamWriter(System.out));
+                        long startTime = System.currentTimeMillis();
+                        long elaspedTime = 0L;
+                        while(!reader.readLine().equals(separator) && elaspedTime < (double) 1000/frames){
+                            String data = reader.readLine();
+                            log.write(data);
+                            elaspedTime = (new Date()).getTime() - startTime;
+                            //Thread.sleep(1000/frames);
                         }
+                        System.out.flush();
+                        if(elaspedTime < 1000){
+                            Thread.sleep((double)1000/frames - elaspedTime);
+                        }
+                        System.out.println("\033[H\033[2J");
                     }
                 }
             } else {
