@@ -1,7 +1,11 @@
 package animationinterminal;
 public class Main{
-    public static void main(String args[]){
-        Animation animation = new Animation(60);
+    //TODO: Add recursion and inheritance
+    public static void main(String args[]) throws InterruptedException{
+        Animation animation = new Animation(3);
         animation.animate();
+        Animation sixty = new SixtyFrames();
+        sixty.animate();
+        animation.recursively(142);
     }
 }

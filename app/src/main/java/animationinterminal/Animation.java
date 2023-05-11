@@ -1,34 +1,37 @@
 package animationinterminal;
 
-import org.checkerframework.checker.units.qual.A;
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.OutputStreamWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 public class Animation{
     private int frames;
-    private File animation = new File("C:\\Users\\Geo\\Desktop\\AnimationInTerminal\\app\\src\\main\\java\\animationinterminal\\animation.txt");
+    private File animation = new File("resources/animation.txt");
     public Animation(int frame){
         frames = frame;
-        System.out.println(animation.getPath());
+        try {
+            System.out.println(animation.getCanonicalPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<String> readFile(){
         System.out.println("Reading from " + animation);
-        ArrayList<String> frames = new ArrayList<String>();
+        ArrayList<String> keyFrames = new ArrayList<String>();
         try(BufferedReader reader = new BufferedReader(new FileReader(animation))){
             String buffer = "";
             while(true) {
                 String line = reader.readLine();
                 if(line == null){
+                    if(!buffer.equals("")){
+                        keyFrames.add(buffer);
+                    }
                     break;
                 }
                 if(line.equals("")){
-                    frames.add(buffer);
+                    keyFrames.add(buffer);
                     buffer = "";
                 }
                 buffer += line + "\n";
@@ -36,29 +39,31 @@ public class Animation{
         } catch (Exception e){
             e.printStackTrace();
         }
-        if(frames.size() == 0){
+        if(keyFrames.size() == 0){
             System.out.println("An reading error has occured");
         }
-        return frames;
+        return keyFrames;
     }
 
-    public void animate(){
-        ArrayList<String> frame = readFile();
+    public int recursively(int n){
+        if(n <= 1)
+            return n;
+        
+        return n + recursively(n-2);
+        
+    }
+
+    public void animate() throws InterruptedException{
+        ArrayList<String> keyFrames = readFile();
+        Thread.sleep(2000);
         //Animation Loop
-        long startTime = System.currentTimeMillis();
-        long elaspedTime = 0L;
         try {
-            for (String s : frame) {
-                System.out.println(s);
-                elaspedTime = (new Date()).getTime() - startTime;
-                if (elaspedTime < 1000/frames) {
-                    Thread.sleep(1000 / frames - elaspedTime);
-                } else {
-                    System.out.flush();
-                }
+            for (String s : keyFrames) {
                 System.out.println("\033[H\033[2J");
+                System.out.println(s);
+                Thread.sleep(1000/frames);
             }
-        } catch (InterruptedException e){
+        } catch (Exception e){
             e.printStackTrace();
         }
 
